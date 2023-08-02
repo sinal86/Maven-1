@@ -10,15 +10,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class MyTest_1 extends BaseClass {
-    @Before
-    public void setUp() {
-        initDriver();
-    }
 
     @Test
     public void LogoLJ() {
-        webDriver.get("https://www.livejournal.com/");
-        WebElement webElement1 = webDriver.findElement(By.xpath("//div[@class = 's-logo']//a[@href = \"https://www.livejournal.com\"]//span[contains(text(), 'LiveJournal')]"));
+        open("https://www.livejournal.com/");
+        WebElement webElement1 = driver.findElement(By.xpath("//div[@class = 's-logo']//a[@href = \"https://www.livejournal.com\"]//span[contains(text(), 'LiveJournal')]"));
         Assert.assertTrue(webElement1.isDisplayed());
         Assert.assertEquals("LiveJournal", webElement1.getText());
     }

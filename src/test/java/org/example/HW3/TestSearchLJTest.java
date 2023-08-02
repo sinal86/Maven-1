@@ -24,27 +24,6 @@ public class TestSearchLJTest extends BaseClass {
     private Map<String, Object> vars;
     JavascriptExecutor js;
 
-    @Before
-    public void setUp() {
-        initDriver();
-        js = (JavascriptExecutor) webDriver;
-    }
-
-
-       public String waitForWindow(int timeout) {
-        try {
-            Thread.sleep(timeout);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Set<String> whNow = webDriver.getWindowHandles();
-        Set<String> whThen = (Set<String>) vars.get("window_handles");
-        if (whNow.size() > whThen.size()) {
-            whNow.removeAll(whThen);
-        }
-        return whNow.iterator().next();
-    }
-
     @Test
     public void testsearchLJ() {
         try {
@@ -52,19 +31,15 @@ public class TestSearchLJTest extends BaseClass {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        webDriver.get("https://www.livejournal.com/");
-        webDriver.manage().window().setSize(new Dimension(1936, 1048));
-        WebElement element = webDriver.findElement(By.cssSelector(".s-do-item-search-btn"));
-        Actions builder = new Actions(webDriver);
+        open("https://www.livejournal.com/");
+        driver.manage().window().setSize(new Dimension(1936, 1048));
+        WebElement element = driver.findElement(By.cssSelector(".s-do-item-search-btn"));
+        Actions builder = new Actions(driver);
         builder.moveToElement(element).perform();
-        webDriver.findElement(By.cssSelector(".s-do-item-search-btn .svgicon")).click();
-        webDriver.findElement(By.cssSelector(".s-header-search__input-wrapper > #SearchText")).sendKeys("Электрокары");
-        webDriver.findElement(By.cssSelector(".s-header-search__input-wrapper > #SearchText")).sendKeys(Keys.ENTER);
-        webDriver.switchTo().window(vars.get("win3823").toString());
+        driver.findElement(By.cssSelector(".s-do-item-search-btn .svgicon")).click();
+        driver.findElement(By.cssSelector(".s-header-search__input-wrapper > #SearchText")).sendKeys("Электрокары");
+        driver.findElement(By.cssSelector(".s-header-search__input-wrapper > #SearchText")).sendKeys(Keys.ENTER);
+        driver.switchTo().window(vars.get("win3823").toString());
     }
 
-    @After
-    public void tearDown() {
-        webDriver.quit();
-    }
 }

@@ -33,47 +33,36 @@ public class CreatenewPostLJTest extends BaseClass {
     private Map<String, Object> vars;
     JavascriptExecutor js;
 
-    @Before
-    public void setUp() {
-        initDriver();
-        js = (JavascriptExecutor) webDriver;
-        vars = new HashMap<String, Object>();
-    }
-
     @Test
     public void createnewPostLJ() {
-        webDriver.get("https://www.livejournal.com/");
-        webDriver.manage().window().setSize(new Dimension(974, 523));
+        open("https://www.livejournal.com/");
+        driver.manage().window().setSize(new Dimension(974, 523));
         {
-            WebElement element = webDriver.findElement(By.cssSelector(".s-header-item__link--checklist"));
-            Actions builder = new Actions(webDriver);
+            WebElement element = driver.findElement(By.cssSelector(".s-header-item__link--checklist"));
+            Actions builder = new Actions(driver);
             builder.moveToElement(element).perform();
         }
-        webDriver.findElement(By.cssSelector(".s-header-item__link--login")).click();
-        webDriver.findElement(By.id("user")).click();
-        webDriver.findElement(By.id("user")).sendKeys("Vasiliy_Pup123");
-        webDriver.findElement(By.id("lj_loginwidget_password")).click();
-        webDriver.findElement(By.id("lj_loginwidget_password")).sendKeys("Qwerasdf_1234");
-        webDriver.findElement(By.name("action:login")).click();
+        driver.findElement(By.cssSelector(".s-header-item__link--login")).click();
+        driver.findElement(By.id("user")).click();
+        driver.findElement(By.id("user")).sendKeys("Vasiliy_Pup123");
+        driver.findElement(By.id("lj_loginwidget_password")).click();
+        driver.findElement(By.id("lj_loginwidget_password")).sendKeys("Qwerasdf_1234");
+        driver.findElement(By.name("action:login")).click();
 
-        webDriver.manage().window().setSize(new Dimension(1936, 1048));
-        webDriver.findElement(By.cssSelector(".s-header-item-post--short")).click();
-        webDriver.findElement(By.cssSelector(".short-post-toolbar__item:nth-child(3) span")).click();
-        webDriver.switchTo().frame(3);
-        webDriver.findElement(By.cssSelector(".text-0-2-59")).click();
-        webDriver.findElement(By.cssSelector(".text-0-2-59")).sendKeys("Новый пост");
-        webDriver.findElement(By.cssSelector(".public-DraftStyleDefault-block")).click();
-        webDriver.findElement(By.cssSelector(".text-0-2-59")).sendKeys("Новый Пост");
-        webDriver.findElement(By.cssSelector(".notranslate")).click();
+        driver.manage().window().setSize(new Dimension(1936, 1048));
+        driver.findElement(By.cssSelector(".s-header-item-post--short")).click();
+        driver.findElement(By.cssSelector(".short-post-toolbar__item:nth-child(3) span")).click();
+        driver.switchTo().frame(3);
+        driver.findElement(By.cssSelector(".text-0-2-59")).click();
+        driver.findElement(By.cssSelector(".text-0-2-59")).sendKeys("Новый пост");
+        driver.findElement(By.cssSelector(".public-DraftStyleDefault-block")).click();
+        driver.findElement(By.cssSelector(".text-0-2-59")).sendKeys("Новый Пост");
+        driver.findElement(By.cssSelector(".notranslate")).click();
         {
-            WebElement element = webDriver.findElement(By.cssSelector(".notranslate"));
+            WebElement element = driver.findElement(By.cssSelector(".notranslate"));
             js.executeScript("if(arguments[0].contentEditable === 'true') {arguments[0].innerText = '<div data-contents=\"true\"><div class=\"contentEditableHelper beforeAll\" style=\"height: 1px; overflow: hidden; font-size: 0px; opacity: 0;\"></div><div class=\"aentry-post__block--unstyled\" data-block=\"true\" data-editor=\"djs2u\" data-offset-key=\"16gg0-0-0\"><div data-offset-key=\"16gg0-0-0\" class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\"><span data-offset-key=\"16gg0-0-0\"><span data-text=\"true\">Hello world!</span></span></div></div><div class=\"contentEditableHelper afterAll\" data-offset-key=\"16gg0-0-0\" style=\"height: 1px; overflow: hidden; font-size: 0px; opacity: 0;\"></div></div>'}", element);
         }
-        webDriver.findElement(By.cssSelector(".submitBtn-0-2-77 > .rootIn-0-2-95")).click();
+        driver.findElement(By.cssSelector(".submitBtn-0-2-77 > .rootIn-0-2-95")).click();
     }
 
-    @After
-    public void tearDown() {
-        webDriver.quit();
-    }
 }

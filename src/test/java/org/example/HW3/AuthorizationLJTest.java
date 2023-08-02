@@ -35,30 +35,19 @@ public class AuthorizationLJTest extends BaseClass {
     private Map<String, Object> vars;
     JavascriptExecutor js;
 
-    @Before
-    public void setUp() {
-        initDriver();
-        js = (JavascriptExecutor) webDriver;
-        vars = new HashMap<String, Object>();
-    }
-
     @Test
     public void authorizationLJ() {
-        webDriver.get("https://www.livejournal.com/");
-        webDriver.manage().window().setSize(new Dimension(974, 523));
-            WebElement element = webDriver.findElement(By.cssSelector(".s-header-item__link--checklist"));
-            Actions builder = new Actions(webDriver);
+        open("https://www.livejournal.com/");
+        driver.manage().window().setSize(new Dimension(974, 523));
+            WebElement element = driver.findElement(By.cssSelector(".s-header-item__link--checklist"));
+            Actions builder = new Actions(driver);
             builder.moveToElement(element).perform();
-        webDriver.findElement(By.cssSelector(".s-header-item__link--login")).click();
-        webDriver.findElement(By.id("user")).click();
-        webDriver.findElement(By.id("user")).sendKeys("Vasiliy_Pup123");
-        webDriver.findElement(By.id("lj_loginwidget_password")).click();
-        webDriver.findElement(By.id("lj_loginwidget_password")).sendKeys("Qwerasdf_1234");
-        webDriver.findElement(By.name("action:login")).click();
+        driver.findElement(By.cssSelector("//a[contains(text(), 'Войти')]")).click();
+        driver.findElement(By.id("user")).click();
+        driver.findElement(By.id("user")).sendKeys("Vasiliy_Pup123");
+        driver.findElement(By.id("lj_loginwidget_password")).click();
+        driver.findElement(By.id("lj_loginwidget_password")).sendKeys("Qwerasdf_1234");
+        driver.findElement(By.name("action:login")).click();
     }
 
-    @After
-    public void tearDown() {
-        webDriver.quit();
-    }
 }
